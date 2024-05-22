@@ -2,6 +2,11 @@
   "name": "grupo3edp",
   "version": "1.0.0",
   "description": "Este es un trabajo práctico para la materia Estrategias de Persistencia en la UNAHUR",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon src/app.js",
+    "start": "node src/app.js"
+  },
   "dependencies": {
     "express": "^4.19.2",
     "lodash": "^4.17.21",
