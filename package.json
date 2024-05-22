@@ -1,0 +1,15 @@
+{
+  "name": "grupo3edp",
+  "version": "1.0.0",
+  "description": "Este es un trabajo práctico para la materia Estrategias de Persistencia en la UNAHUR",
+  "dependencies": {
+    "express": "^4.19.2",
+    "lodash": "^4.17.21",
+    "sequelize": "^6.37.3",
+    "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0",
+    "sequelize-cli": "^6.6.2"
+  }
+}
