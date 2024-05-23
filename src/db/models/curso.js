@@ -4,7 +4,17 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Curso extends Model {
-    
+    static associate(models) { // LO AGREGUÉ PERO DUDO QUE ESTE BIEN, DEBEMOS REVISAR LA LOGICA
+      Curso.belongsTo(models.Materia, {
+        as: 'materias',
+        foreignKey: 'materia_id',
+      })
+      Curso.belongsTo(models.Profesor, {
+        as: 'profesores',
+        foreignKey: 'profesor_id'
+      })
+
+    }
     
   }
   
