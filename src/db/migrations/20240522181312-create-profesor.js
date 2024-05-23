@@ -20,7 +20,7 @@ module.exports = {
       },
       activo: {
         type: Sequelize.BOOLEAN
-      }/* ,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
@@ -28,7 +28,7 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
-      } */
+      }
     });
   },
   async down(queryInterface, Sequelize) {

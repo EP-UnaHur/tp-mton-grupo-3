@@ -16,11 +16,7 @@ const carreraSchema = Joi.object().keys({
         "any.required": "anio es requerido"      
 
     }),
-   
-    carreraid: Joi.number().required().messages({
-        "any.required": "carreraid es requerido"      
 
-    })
 });
 
 module.exports = carreraSchema;

@@ -14,4 +14,6 @@ route.get('/carreras/:id', middlewareCarrera.existsById(Carrera) , carreraContro
 route.post('/carreras', middlewareCarrera.validaSchema(carreraSchema),  carreraController.crearCarrera)
 
 route.post('/carreras/:id/materia', middlewareCarrera.validaSchema(materiaSchema),  carreraController.crearMateriaEnCarrera)
+
+route.get('/carreras/:id/materias', middlewareCarrera.validaSchema(materiaSchema),  carreraController.obtenerMateriasDeCarrera)
 module.exports = route

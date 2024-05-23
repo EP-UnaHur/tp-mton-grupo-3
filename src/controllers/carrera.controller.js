@@ -45,9 +45,11 @@ controller.crearCarrera = crearCarrera;
 const crearMateriaEnCarrera = async (req, res) => {
     try {
         let id = req.params.id;
-        let materia = await Materia.create(req.body);
-        let data = await Carrera.findByPk(id, 
-            {
+        let carrera = await Carrera.findByPk(id, { where: {id: id} });
+        if (carrera) { //si encuentra la carrera, le agrega la materia, sino da 404
+            req.body.carreraid = id;
+            let materia = await Materia.create(req.body);
+            carrera.update({
                 where: {
                     id: id,
                     Materia: {materia}
@@ -56,29 +58,31 @@ const crearMateriaEnCarrera = async (req, res) => {
                     model: Materia,
                     as: 'materias'
                 }]
-            }
-        );
-        if (data)
-            return res.status(200).json({
-                success: true,
-                data: data
             })
-        else
             return res.status(200).json({
-                success: false,
-                error: "No existe esa carrera",
-                data: []
+                carrera: carrera
             })
-      /*   console.log(req.body.carreraid) //no estoy segura como manejar los datos, en qué orden hacer las cosas
-        const carrera = Carrera.findByPk(req.body.carreraid);
-        const materia = Materia.create(req.body)
-      res.status(201).json(materia); */
-
+        } else {
+            return res.status(404).json({
+                error: "No existe la carrera con id: " +id,
+                carrera: []
+            })
+        }
     } catch (error) {
-      res.status(400).json(`Error: ${error.message}`);
+        res.status(400).json(`Error: ${error.message}` );
             
     }
 }
 controller.crearMateriaEnCarrera = crearMateriaEnCarrera;
 
+const obtenerMateriasDeCarrera = async (req,res) => {
+    try {
+        let id = req.params.id;
+        let carrera = await Carrera.findByPk(id, { where: {id: id}, include: {model: Materia, as:'materias'}});
+        return res.status(200).json({ carrera: carrera })
+    } catch (error) {
+        res.status(400).json(`Error: ${error.message}` );
+    }
+}
+controller.obtenerMateriasDeCarrera = obtenerMateriasDeCarrera;
 module.exports = controller;
