@@ -1,10 +1,13 @@
 require('dotenv').config({ allowEmptyValues: true });// Este package permite usar las variables de entorno definidas en el archivo .env
 const express = require('express');
+const carreraRoute = require('./routes/carrera-route')
 const app = express();
 const db = require('./db/models');
 const port = process.env.PORT;
-app.use(express.json())
+app.use(express.json());
+app.use(carreraRoute);
 
+/* 
 function createCarrera(nombre,grado,universidad) {
   db.Carrera.create({
     nombre: nombre,
@@ -30,7 +33,6 @@ app.get('/carreras', async (req, res)=>{
     }); //no filtro por nada, devuelve todo
     res.status(200).json(carreras);
   })
-
   
 app.get('/carreras/:id', async (req, res)=>{
     const id = req.params.id;
@@ -39,7 +41,7 @@ app.get('/carreras/:id', async (req, res)=>{
       attributes: ["id","nombre", "grado", "universidad"]
     }); 
     res.status(200).json(carreras);
-  })
+  }) */
   
   
 
@@ -48,8 +50,8 @@ app.listen(process.env.PORT, async() => {
     try {
       await db.sequelize.authenticate()
       await db.sequelize.sync({force:true});
-      createCarrera("Introducción a Matemática","Primer año","UNAHUR"); //los creo solo para que haya algo apenas inicia la app, desp se puede borrar
-      createCarrera("Estrategias de Persistencia","Segundo año","UNAHUR");
+     /*  createCarrera("Introducción a Matemática","Primer año","UNAHUR"); //los creo solo para que haya algo apenas inicia la app, desp se puede borrar
+      createCarrera("Estrategias de Persistencia","Segundo año","UNAHUR"); */
     } catch (error) {
      console.log(error);
     }
