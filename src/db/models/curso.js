@@ -9,9 +9,8 @@ module.exports = (sequelize, DataTypes) => {
         as: 'materias',
         foreignKey: 'materia_id',
       })
-      Curso.belongsTo(models.Profesor, {
-        as: 'profesores',
-        foreignKey: 'profesor_id'
+      Curso.belongsToMany(models.Profesor, {
+        through: 'curso_profesor'
       })
 
     }
