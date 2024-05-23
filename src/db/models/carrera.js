@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     nombre: DataTypes.STRING,
     grado: DataTypes.STRING,
-    universidad: DataTypes.STRING
+    universidad: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'Carrera',

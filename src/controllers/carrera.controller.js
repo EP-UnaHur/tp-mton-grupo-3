@@ -1,4 +1,4 @@
-const {Carrera} = require('../db/models')
+const {Carrera,Materia} = require('../db/models')
 
 const controller = {}
 
@@ -28,5 +28,19 @@ const crearCarrera = async (req, res) => {
     }
 }
 controller.crearCarrera = crearCarrera;
+
+const crearMateriaEnCarrera = async (req, res) => {
+    try {
+        console.log(req.body.carreraid) //no estoy segura como manejar los datos, en qué orden hacer las cosas
+        const carrera = Carrera.findByPk(req.body.carreraid);
+        const materia = Materia.create(req.body)
+      res.status(201).json(materia);
+
+    } catch (error) {
+      res.status(400).json(`Error: ${error.message}`);
+            
+    }
+}
+controller.crearMateriaEnCarrera = crearMateriaEnCarrera;
 
 module.exports = controller;
