@@ -20,11 +20,7 @@ const carreraSchema = Joi.object().keys({
     carreraid: Joi.number().required().messages({
         "any.required": "carreraid es requerido"      
 
-    }),
-    id: Joi.number().required().messages({
-        "any.required": "id es requerido"      
-
-    }),
+    })
 });
 
 module.exports = carreraSchema;
