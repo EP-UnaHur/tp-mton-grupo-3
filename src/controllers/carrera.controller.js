@@ -1,28 +1,30 @@
-const {Carrera,Materia} = require('../db/models')
+const { Carrera, Materia } = require('../db/models')
 
 const controller = {}
 
 const getAllCarreras = async (req, res) => {
-    res.status(200).json(await Carrera.findAll({include: [{
-        model: Materia,
-        as: 'materias'
-    }]}))
+    res.status(200).json(await Carrera.findAll({
+        include: [{
+            model: Materia,
+            as: 'materias'
+        }]
+    }))
 }
 controller.getAllCarreras = getAllCarreras;
 
-const carreraById = async(req, res) => {
+const carreraById = async (req, res) => {
     const id = req.params.id
     try {
-        const result = await Carrera.findByPk((id, 
-            {
-                where: {
-                    id: id,
-                },
-                include: [{
-                    model: Materia,
-                    as: 'materias'
-                }]
-            }
+        const result = await Carrera.findByPk((id,
+        {
+            where: {
+                id: id,
+            },
+            include: [{
+                model: Materia,
+                as: 'materias'
+            }]
+        }
         ));
         res.status(200).json(result);
     } catch (error) {
@@ -34,10 +36,10 @@ controller.carreraById = carreraById;
 const crearCarrera = async (req, res) => {
     const carrera = req.body;
     try {
-      const newRecord = await Carrera.create(carrera); 
-      res.status(201).json(newRecord);
+        const newRecord = await Carrera.create(carrera);
+        res.status(201).json(newRecord);
     } catch (error) {
-      res.status(400).json(`Error: ${error.message}`);
+        res.status(400).json(`Error: ${error.message}`);
     }
 }
 controller.crearCarrera = crearCarrera;
@@ -45,14 +47,14 @@ controller.crearCarrera = crearCarrera;
 const crearMateriaEnCarrera = async (req, res) => {
     try {
         let id = req.params.id;
-        let carrera = await Carrera.findByPk(id, { where: {id: id} });
+        let carrera = await Carrera.findByPk(id, { where: { id: id } });
         if (carrera) { //si encuentra la carrera, le agrega la materia, sino da 404
             req.body.carreraid = id;
             let materia = await Materia.create(req.body);
             carrera.update({
                 where: {
                     id: id,
-                    Materia: {materia}
+                    Materia: { materia }
                 },
                 include: [{
                     model: Materia,
@@ -64,24 +66,24 @@ const crearMateriaEnCarrera = async (req, res) => {
             })
         } else {
             return res.status(404).json({
-                error: "No existe la carrera con id: " +id,
+                error: "No existe la carrera con id: " + id,
                 carrera: []
             })
         }
     } catch (error) {
-        res.status(400).json(`Error: ${error.message}` );
-            
+        res.status(400).json(`Error: ${error.message}`);
+
     }
 }
 controller.crearMateriaEnCarrera = crearMateriaEnCarrera;
 
-const obtenerMateriasDeCarrera = async (req,res) => {
+const obtenerMateriasDeCarrera = async (req, res) => {
     try {
         let id = req.params.id;
-        let carrera = await Carrera.findByPk(id, { where: {id: id}, include: {model: Materia, as:'materias'}});
+        let carrera = await Carrera.findByPk(id, { where: { id: id }, include: { model: Materia, as: 'materias' } });
         return res.status(200).json({ carrera: carrera })
     } catch (error) {
-        res.status(400).json(`Error: ${error.message}` );
+        res.status(400).json(`Error: ${error.message}`);
     }
 }
 controller.obtenerMateriasDeCarrera = obtenerMateriasDeCarrera;
