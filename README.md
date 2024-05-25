@@ -1,6 +1,7 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/wCJ4UtrS)
-//1. Crear carpetas (estructura básica)
-//2. Modelos
-//3. Estructurar app.js
-//4. Rutas
-//5. Controladores
+![Diagrama de entidad-relación](/images/DER.png)
+
+1. Crear carpetas (estructura básica)
+2. Modelos
+3. Estructurar app.js
+4. Rutas
+5. Controladores

@@ -1,15 +1,18 @@
-require("dotenv").config({ allowEmptyValues: true }); // Este package permite usar las variables de entorno definidas en el archivo .env
-const express = require("express");
-const carreraRoute = require("./routes/carrera.route");
-const materiaRoute = require("./routes/materia.route");
+require('dotenv').config({ allowEmptyValues: true });// Este package permite usar las variables de entorno definidas en el archivo .env
+const express = require('express');
+const carreraRoute = require('./routes/carrera.route')
+const materiaRoute = require('./routes/materia.route')
+const profesorRoute = require('./routes/profesor.route')
 const app = express();
 const db = require("./db/models");
 const port = process.env.PORT;
+
 
 app.use(express.json());
 
 app.use(carreraRoute);
 app.use(materiaRoute);
+app.use(profesorRoute);
 
 /* 
 function createCarrera(nombre,grado,universidad) {
