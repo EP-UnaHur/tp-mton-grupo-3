@@ -11,4 +11,8 @@ route.get('/profesores/:id', middlewareProfesor.existsById(Profesor), profesorCo
 
 route.post('/profesores', middlewareProfesor.validaSchema(profesorSchema), profesorController.crearProfesor)
 
+route.put('/profesores/:id', middlewareProfesor.existsById(Profesor), middlewareProfesor.validaSchema(profesorSchema), profesorController.modificarProfesor)
+
+route.delete('/profesores/:id', profesorController.borrarProfesor)
+
 module.exports = route
