@@ -3,10 +3,7 @@ const {Profesor, Curso} = require('../db/models')
 const controller = {}
 
 const getAllProfesores = async (req, res) => {
-    res.status(200).json(await Profesor.findAll({/*include: [{
-        model: Profesor,
-        as: 'profesores'
-    }]*/}))
+    res.status(200).json(await Profesor.findAll({}))
 }
 
 controller.getAllProfesores = getAllProfesores;
@@ -14,17 +11,7 @@ controller.getAllProfesores = getAllProfesores;
 const profesorById = async(req, res) => {
     const id = req.params.id
     try {
-        const result = await Profesor.findByPk((id/*,
-            {
-                where: {
-                    id: id,
-                },
-                include: [{
-                    model: Profesor,
-                    as: 'profesores'
-                }]
-            }*/
-        ));
+        const result = await Profesor.findByPk((id));
         res.status(200).json(result);
     } catch (error) {
         res.status(404).json(`El profesor con id: ${id} no existe.`)
@@ -61,12 +48,28 @@ controller.modificarProfesor = modificarProfesor;
 const borrarProfesor = async (req, res) => {
     const id = req.params.id;
     const row = await Profesor.destroy({where: {id}})
-    if(row)
-        res.status(200).json(`El profesor con id ${id} se borró con éxito`)
-    else
-        res.status(404).json(`El profesor con id ${id} no existe`)
+    try {
+        if(row)
+            res.status(200).json(`El profesor con id ${id} se borró con éxito`)
+        else
+            res.status(404).json(`El profesor con id ${id} no existe`)
+    } catch (err) {
+        res.status(500).json(err.message)
+    }
 }
 
 controller.borrarProfesor = borrarProfesor;
+
+/*const cursosDeProfesor = async(req, res) => {
+    const id = req.params.id;
+    try {
+        const result = await Profesor.findByPk((id));
+        res.status(200).json(result);
+    } catch (error) {
+        res.status(400).json(`El profesor con id: ${id} no existe.`)
+    }
+
+}*/ //falta continuar
+
 
 module.exports = controller;
