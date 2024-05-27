@@ -1,5 +1,4 @@
 const Joi = require('joi')
-const validateDate = require('../utils/date.validator')
 
 const carreraSchema = Joi.object().keys({
     nombre: Joi.string().required().min(3).max(20).messages({

@@ -8,13 +8,15 @@ const profesorSchema = Joi.object().keys({
         "string.empty": "nombre no puede ser vacio",
         "any.required": "nombre es requerido"
     }),
+    
     fechaNacimiento: Joi.string().custom(validateDate).messages({
         "any.custom": "El formato de la fecha debe ser YYYY-MM-DD",
         "any.required": "El campo fecha de nacimiento es obligatorio"
     }),
-    legajo: Joi.number().integer().min(3).messages({
-        "number.min": `el legajo debe tener al menos {#limit} números.`,
-        "number.max": `el legajo debe tener como máximo {#limit} números.`
+
+    legajo: Joi.number().integer().min(100).max(9999).messages({ //Joi.number().integer().greater(99).less(10000).messages({
+        "number.min": `el legajo debe tener al menos 3 números.`,
+        "number.max": `el legajo debe tener como máximo 5 números.`
     }),
 
     activo: Joi.boolean().required().messages({
