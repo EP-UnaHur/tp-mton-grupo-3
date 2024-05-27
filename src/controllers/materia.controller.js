@@ -34,9 +34,12 @@ const getCursosDeMaterias = async (req, res) => {
     try {
         let id = req.params.id;
         let materia = await Materia.findByPk(id, { where: { id: id }, include: { model: Curso, as: 'cursos' } });
+        if (!materia) {
+            return res.status(404).json({ error: 'Materia no encontrada' });
+        }
         return res.status(200).json({ materia: materia })
     } catch (error) {
-        res.status(400).json(`Error: ${error.message}`)
+        res.status(404).json(`Error: ${error.message}`)
     }
 }
 controller.getCursosDeMaterias = getCursosDeMaterias;
@@ -47,7 +50,7 @@ const deleteMateria = async (req, res) => {
         const result = await Materia.destroy({ where: { id: id } })
         res.status(200).json(`La materia con id: ${id} ha sido eliminada correctamente`)
     } catch (error) {
-        res.status(400).json(error.message)
+        res.status(404).json(error.message)
     }
 }
 controller.deleteMateria = deleteMateria;

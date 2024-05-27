@@ -12,6 +12,10 @@ module.exports = (sequelize, DataTypes) => {
         as: "carrera",
         foreignKey: "carreraid",
       });
+      Materia.hasMany(models.Curso, {
+        as: "cursos",
+        foreignKey: "materia_id",
+      });
     }
   }
   Materia.init(
