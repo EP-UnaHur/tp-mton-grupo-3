@@ -16,25 +16,23 @@ const cursoById = async(req, res) => {
         res.status(404).json(`El curso con id: ` + $(id) + ` no existe.`)
     }
 }
-controller.cursoById = CursoById;
+controller.cursoById = cursoById;
 
-// const crearCurso = async (req, res) => {
-//     const materia = req.body;
-//     try {
-//       const newRecord = await Curso.create(materia); 
-//       res.status(201).json(newRecord);
-//     } catch (error) {
-//       res.status(400).json(`Error: ${error.message}`);
-//     }
-// }       ---- NO SE SI EL CURSO SE CREA ACA O EN MATERIA ----
+/* const crearCurso = async (req, res) => {
+    const materia = req.body;
+    try {
+    const newRecord = await Curso.create(materia); 
+    res.status(201).json(newRecord);
+    } catch (error) {
+    res.status(400).json(`Error: ${error.message}`);
+    }
+}       //---- NO SE SI EL CURSO SE CREA ACA O EN MATERIA ----
 
-//controller.crearCurso = crearCurso;
-
-
-
+controller.crearCurso = crearCurso;
+ */
 const borrarCurso = async (req, res)=>{
     const id = req.params.id;
-    const row = await db.Curso.destroy({where: {id}})
+    const row = await Curso.destroy({where: {id}})
     if(row) {
      res.status(200).json(`El curso con id ${id} se borro con exito.`)
     } else {
@@ -44,17 +42,25 @@ const borrarCurso = async (req, res)=>{
 
  controller.borrarCurso = borrarCurso;
 
-const editarDatoCurso = (req, res)=>{
+const modificarCurso = async (req, res)=>{
     const id = req.params.id;
-    const idx = data.findIndex( e => e.id == id)
-    if (idx >=0) {
-      data[idx] = {id: Number(id), ...req.body}
-      res.status(200).json(data[idx])
-    } else
-      res.status(404).json({error: `El id ${id} no existe.`})
+    const curso = await Curso.findByPk(id, {where:{id:id}}); 
+    const data = req.body;
+    if (curso) {
+        curso.update({
+            comision: data.comision,
+            turno: data.turno,
+            fechaInicio: data.fechaInicio,
+            fechaFin: data.fechaFin,
+            materiaid: data.materiaid,
+        })
+        res.status(200).json(curso)
+    } else {
+        res.status(404).json(`El curso con id: ${id} no existe`)
+    }
 }
 
-controller.editarDatoCurso = editarDatoCurso;
+controller.modificarCurso = modificarCurso;
 
 const obtenerProfesoresCurso = async (req,res) => {
     try {

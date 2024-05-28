@@ -3,6 +3,7 @@ const express = require('express');
 const carreraRoute = require('./routes/carrera.route')
 const materiaRoute = require('./routes/materia.route')
 const profesorRoute = require('./routes/profesor.route')
+const cursoRoute = require('./routes/curso.route')
 const app = express();
 const db = require("./db/models");
 const port = process.env.PORT;
@@ -13,6 +14,7 @@ app.use(express.json());
 app.use(carreraRoute);
 app.use(materiaRoute);
 app.use(profesorRoute);
+app.use(cursoRoute);
 
 /* 
 function createCarrera(nombre,grado,universidad) {
