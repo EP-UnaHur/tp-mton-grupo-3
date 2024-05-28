@@ -44,12 +44,13 @@ const modificarProfesor = async (req, res) => {
     } else 
         res.status(404).json(`El profesor con id: ${id} no existe.`)*/
     const profesor = await Profesor.findByPk(id, {where:{id:id}}); 
+    const data = req.body;
     if (profesor) {
         profesor.update({
-            nombre: req.body.nombre,
-            fechaNacimiento: req.body.fechaNacimiento,
-            legajo: req.body.legajo,
-            activo: req.body.activo
+            nombre: data.nombre,
+            fechaNacimiento: data.fechaNacimiento,
+            legajo: data.legajo,
+            activo: data.activo
         })
         res.status(200).json(profesor)
     } else {
