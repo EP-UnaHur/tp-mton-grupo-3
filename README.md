@@ -1,6 +1,6 @@
-#Estrategias de Persistencia - TP 2024
+# Estrategias de Persistencia - TP 2024
 
-##Instalación y ejecución
+## Instalación y ejecución
 
 Para instalar la API se debe correr el comando:
 
@@ -21,7 +21,7 @@ Dentro de la carpeta raíz TP-MTON-GRUPO-3 se debe generar un archivo llamado ".
 PORT = 3000
 ```
 
-##Diagrama entidad-relación
+## Diagrama entidad-relación
 
 ![Diagrama de entidad-relación](/images/DER.png)
 
