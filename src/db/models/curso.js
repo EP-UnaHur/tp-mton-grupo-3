@@ -7,16 +7,16 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) { // LO AGREGUÉ PERO DUDO QUE ESTE BIEN, DEBEMOS REVISAR LA LOGICA
       Curso.belongsTo(models.Materia, {
         as: 'materias',
-        foreignKey: 'materia_id',
+        foreignKey: 'materiaid',
       })
       Curso.belongsToMany(models.Profesor, {
         through: 'curso_profesor'
       })
 
     }
-    
+
   }
-  
+
   Curso.init({
     id: {
       allowNull: false,
@@ -28,10 +28,11 @@ module.exports = (sequelize, DataTypes) => {
     turno: DataTypes.STRING,
     fechaInicio: DataTypes.DATEONLY,
     fechaFin: DataTypes.DATEONLY,
-    materiaId: DataTypes.STRING,
+    materiaid: DataTypes.INTEGER,
   }, {
     sequelize,
     modelName: 'Curso',
+    timestamps: false,
   });
 
   return Curso;

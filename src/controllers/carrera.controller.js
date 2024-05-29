@@ -50,6 +50,7 @@ const crearMateriaEnCarrera = async (req, res) => {
         let carrera = await Carrera.findByPk(id, { where: { id: id } });
         if (carrera) { //si encuentra la carrera, le agrega la materia, sino da 404
             req.body.carreraid = id;
+            console.log(req.body);
             let materia = await Materia.create(req.body);
             carrera.update({
                 where: {
@@ -61,6 +62,7 @@ const crearMateriaEnCarrera = async (req, res) => {
                     as: 'materias'
                 }]
             })
+            carrera = await Carrera.findByPk(id, { where: { id: id }, include: { model: Materia, as: 'materias' } });
             return res.status(200).json({
                 carrera: carrera
             })

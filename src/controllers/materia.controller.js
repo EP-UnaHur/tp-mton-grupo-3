@@ -18,16 +18,40 @@ const materiaById = async (req, res) => {
 }
 controller.materiaById = materiaById;
 
-const crearMateria = async (req, res) => {
-    const carrera = req.body;
+const crearCursoEnMateria = async (req, res) => {
     try {
-        const newRecord = await Materia.create(carrera);
-        res.status(201).json(newRecord);
+        let id = req.params.id;
+        let materia = await Materia.findByPk(id, { where: { id: id } });
+        if (materia) { //si encuentra la materia, le agrega el curso, sino da 404
+            req.body.materiaid = id;
+            console.log(req.body)
+            let curso = await Curso.create(req.body);
+            materia.update({
+                where: {
+                    id: id,
+                    Curso: { curso }
+                },
+                include: [{
+                    model: Curso,
+                    as: 'cursos'
+                }]
+            })
+            materia = await Materia.findByPk(id, { where: { id: id }, include: { model: Curso, as: 'cursos' } });
+            return res.status(200).json({
+                materia: materia
+            })
+        } else {
+            return res.status(404).json({
+                error: "No existe la materia con id: " + id,
+                materia: []
+            })
+        }
     } catch (error) {
         res.status(400).json(`Error: ${error.message}`);
+
     }
 }
-controller.crearMateria = crearMateria;
+controller.crearCursoEnMateria = crearCursoEnMateria;
 
 
 const getCursosDeMaterias = async (req, res) => {

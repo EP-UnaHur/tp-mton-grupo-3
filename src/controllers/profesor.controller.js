@@ -33,14 +33,29 @@ controller.crearProfesor = crearProfesor;
 
 const modificarProfesor = async (req, res) => {
     const id = req.params.id;
-    const profesores = await Profesor.findAll()
-    const idx = profesores.findIndex(e => e.id == id)
+/*    const profesores = await Profesor.findAll()
+    const idx = profesores.findIndex(e => e.id == id);
+     console.log(req.body);
     if (idx >=0){
-        Profesor[idx] = {id: Number(id), ...req.body}
+        console.log(idx +"-"+Number(id))
+        Profesor[idx] = {id:Number(id), ...req.body};
+        console.log(Profesor[idx]);
         res.status(200).json(Profesor[idx])
     } else 
-        res.status(404).json(`El profesor con id: ${id} no existe.`)
-
+        res.status(404).json(`El profesor con id: ${id} no existe.`)*/
+    const profesor = await Profesor.findByPk(id, {where:{id:id}}); 
+    const data = req.body;
+    if (profesor) {
+        profesor.update({
+            nombre: data.nombre,
+            fechaNacimiento: data.fechaNacimiento,
+            legajo: data.legajo,
+            activo: data.activo
+        })
+        res.status(200).json(profesor)
+    } else {
+        res.status(404).json(`El profesor con id: ${id} no existe`)
+    }
 }
 
 controller.modificarProfesor = modificarProfesor;
