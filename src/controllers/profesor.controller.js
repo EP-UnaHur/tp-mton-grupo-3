@@ -1,4 +1,4 @@
-const {Profesor, Curso} = require('../db/models')
+const {Profesor, Curso, Materia} = require('../db/models')
 
 const controller = {}
 
@@ -82,7 +82,11 @@ const obtenerCursosDeProfesor = async(req, res) => {
             include:[ { 
                 model: Curso, 
                 as: "cursos",
-                through: {attributes: []} //sin esto trae también la asociacion curso_profesor
+                through: {attributes: []}, //sin esto trae también la asociacion curso_profesor
+                include: [{
+                    model: Materia,
+                    as:"materias"
+                }]
             },
         ]
 
