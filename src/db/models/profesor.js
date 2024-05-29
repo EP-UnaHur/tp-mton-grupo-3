@@ -11,7 +11,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       Profesor.belongsToMany(models.Curso, {
-        through: 'curso_profesor'
+        through: 'curso_profesor',
+        as:"cursos"
       })
     }
   }
@@ -31,7 +32,6 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'Profesor',
     tableName: 'Profesores',
     timestamps: false,
-
   });
   return Profesor;
 };

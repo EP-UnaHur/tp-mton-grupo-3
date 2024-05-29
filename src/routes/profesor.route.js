@@ -15,4 +15,6 @@ route.put('/profesores/:id', middlewareProfesor.existsById(Profesor), middleware
 
 route.delete('/profesores/:id', profesorController.borrarProfesor)
 
+route.get('/profesores/:id/cursos', profesorController.obtenerCursosDeProfesor)
+
 module.exports = route

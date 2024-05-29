@@ -53,7 +53,15 @@ controller.modificarCurso = modificarCurso;
 const obtenerProfesoresCurso = async (req, res) => {
     try {
         let id = req.params.id;
-        let curso = await Curso.findByPk(id, { where: { id: id }, include: { model: Profesor, as: 'profesor' } });
+        let curso = await Curso.findByPk(id, { where: { id: id }, 
+            include:[ { 
+                model: Profesor, 
+                as: "profesores",
+                through: {attributes: []} //sin esto trae también la asociacion curso_profesor
+            },
+        ]
+
+        });
         return res.status(200).json({ curso: curso })
     } catch (error) {
         res.status(400).json(`Error: ${error.message}`);

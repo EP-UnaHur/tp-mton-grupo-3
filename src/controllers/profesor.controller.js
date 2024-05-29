@@ -75,16 +75,24 @@ const borrarProfesor = async (req, res) => {
 
 controller.borrarProfesor = borrarProfesor;
 
-/*const cursosDeProfesor = async(req, res) => {
-    const id = req.params.id;
+const obtenerCursosDeProfesor = async(req, res) => {
     try {
-        const result = await Profesor.findByPk((id));
-        res.status(200).json(result);
-    } catch (error) {
-        res.status(400).json(`El profesor con id: ${id} no existe.`)
-    }
+        let id = req.params.id;
+        let profesor = await Profesor.findByPk(id, { where: { id: id }, 
+            include:[ { 
+                model: Curso, 
+                as: "cursos",
+                through: {attributes: []} //sin esto trae también la asociacion curso_profesor
+            },
+        ]
 
-}*/ //falta continuar
+        });
+        return res.status(200).json({ profesor: profesor })
+    } catch (error) {
+        res.status(400).json(`Error: ${error.message}`);
+    }
+} 
+controller.obtenerCursosDeProfesor = obtenerCursosDeProfesor;
 
 
 module.exports = controller;

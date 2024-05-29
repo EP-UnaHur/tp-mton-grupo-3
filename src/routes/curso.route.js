@@ -11,6 +11,8 @@ route.get('/cursos', cursoController.getAllCursos)
 
 route.get('/cursos/:id', middlewareCurso.existsById(Curso), cursoController.cursoById)
 
+route.get('/cursos/:id/profesores', cursoController.obtenerProfesoresCurso)
+
 route.post('/cursos/:id/profesores', cursoController.crearAsociacionCursoProfesor)
 
 route.delete('/cursos/:id', middlewareCurso.existsById(Curso), cursoController.borrarCurso)
