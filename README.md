@@ -19,6 +19,11 @@ Dentro de la carpeta raíz TP-MTON-GRUPO-3 se debe generar un archivo llamado ".
 
 ```
 PORT = 3000
+DB_USERNAME=root
+DB_PASSWORD=null
+DB_DATABASE=dataStore
+DB_HOST=dbstore/database.sqlite
+DIALECT=sqlite
 ```
 
 ## Diagrama entidad-relación
