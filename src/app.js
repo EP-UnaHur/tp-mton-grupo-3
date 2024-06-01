@@ -16,41 +16,7 @@ app.use(materiaRoute);
 app.use(profesorRoute);
 app.use(cursoRoute);
 
-/* 
-function createCarrera(nombre,grado,universidad) {
-  db.Carrera.create({
-    nombre: nombre,
-    grado: grado,
-    universidad: universidad
-  })
-}
 
-app.post('/carreras', async (req, res)=>{
-    const carrera = req.body;
-    console.log(req.body)
-    try {
-      const newRecord = await db.Carrera.create(carrera); 
-      res.status(201).json(newRecord);
-    } catch (error) {
-      res.status(500).json(`Error: ${error.message}`);
-    }
-  })
-  
-app.get('/carreras', async (req, res)=>{
-    const carreras = await db.Carrera.findAll({
-      attributes: ["id","nombre", "grado", "universidad"]
-    }); //no filtro por nada, devuelve todo
-    res.status(200).json(carreras);
-  })
-  
-app.get('/carreras/:id', async (req, res)=>{
-    const id = req.params.id;
-    const carreras = await db.Carrera.findOne({
-      where: {id},
-      attributes: ["id","nombre", "grado", "universidad"]
-    }); 
-    res.status(200).json(carreras);
-  }) */
 
 app.listen(process.env.PORT, async () => {
   console.log(`La aplicación está corriendo en el puerto ${port}`);
