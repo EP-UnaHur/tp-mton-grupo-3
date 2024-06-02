@@ -52,14 +52,14 @@ controller.modificarProfesor = modificarProfesor;
 
 const borrarProfesor = async (req, res) => {
     const id = req.params.id;
-    const row = await Profesor.destroy({where: {id}})
     try {
+        const row = await Profesor.destroy({where: {id}})
         if(row)
             res.status(200).json(`El profesor con id ${id} se borró con éxito`)
         else
             res.status(404).json(`El profesor con id ${id} no existe`)
-    } catch (err) {
-        res.status(500).json(err.message)
+    } catch (error) {
+        res.status(500).json({ error: 'Internal Server Error' })
     }
 }
 

@@ -70,16 +70,16 @@ controller.getCursosDeMaterias = getCursosDeMaterias;
 
 const deleteMateria = async (req, res) => {
     const id = req.params.id
-    const result = await Materia.destroy({ where: { id: id } })
     
     try{
+        const result = await Materia.destroy({ where: { id: id } })
         if(result)
             res.status(200).json(`La materia con id: ${id} ha sido eliminada correctamente`)
         else
-            res.status(404).json(`La materia con id ${id} no existe`)
-    } catch (err) {
-        res.status(500).json(err.message)
-    }
+            res.status(404).json(`La materia con id: ${id} no existe`)
+    } catch (error) {
+        res.status(500).json({ error: 'Internal Server Error' })
+      }
 }
 controller.deleteMateria = deleteMateria;
 

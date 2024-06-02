@@ -20,16 +20,17 @@ controller.cursoById = cursoById;
 
 const borrarCurso = async (req, res) => {
     const id = req.params.id;
-    const row = await Curso.destroy({ where: { id } })
+    
     try{
+        const row = await Curso.destroy({ where: { id } })
 
         if (row) {
             res.status(200).json(`El curso con id ${id} se borro con exito.`)
         } else {
             res.status(404).json(`El Curso con id ${id} no existe.`)
         }
-    } catch (err) {
-        res.status(500).json(err.message)
+    } catch (error) {
+        res.status(500).json({ error: 'Internal Server Error' })
     }
     
 }

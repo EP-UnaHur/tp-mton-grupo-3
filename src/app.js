@@ -18,6 +18,7 @@ app.use(cursoRoute);
 
 
 
+
 app.listen(process.env.PORT, async () => {
   console.log(`La aplicación está corriendo en el puerto ${port}`);
   try {
