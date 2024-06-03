@@ -26,7 +26,7 @@ app.listen(process.env.PORT, async () => {
     await db.sequelize.authenticate();
     // El método sync solo se usa en ambientes de desarrollo. No utilizar en produccion
     // porque borra todas las tablas y las vueve a crear
-    //await db.sequelize.sync({force:true});
+    // await db.sequelize.sync({force:true});
     /*  createCarrera("Introducción a Matemática","Primer año","UNAHUR"); //los creo solo para que haya algo apenas inicia la app, desp se puede borrar
       createCarrera("Estrategias de Persistencia","Segundo año","UNAHUR"); */
   } catch (error) {

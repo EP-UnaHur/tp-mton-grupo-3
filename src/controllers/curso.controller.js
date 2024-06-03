@@ -88,12 +88,12 @@ const crearAsociacionCursoProfesor = async (req, res) => {
 
         let profesores = await Profesor.findAll({ where: { id: profesorid } });
 
-        let asociacionExiste = await curso.hasProfesors(profesores);
+        let asociacionExiste = await curso.hasProfesores(profesores);
         if (asociacionExiste) {
             return res.status(400).json({ error: "La asociación ya existe" });
         }
 
-        await curso.addProfesors(profesores);
+        await curso.addProfesores(profesores);
 
         res.status(201).json({ message: "Asociación creada con exito" });
     }

@@ -16,10 +16,10 @@ module.exports = {
         type: Sequelize.DATEONLY
       },
       legajo: {
-        type: Sequelize.NUMBER
+        type: Sequelize.INTEGER
       },
       activo: {
-        type: Sequelize.BOOLEAN
+        type: Sequelize.TINYINT
       },
       createdAt: {
         allowNull: false,

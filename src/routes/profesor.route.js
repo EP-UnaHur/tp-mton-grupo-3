@@ -13,7 +13,7 @@ route.post('/profesores', middlewareProfesor.validaSchema(profesorSchema), profe
 
 route.put('/profesores/:id', middlewareProfesor.existsById(Profesor), middlewareProfesor.validaSchema(profesorSchema), profesorController.modificarProfesor)
 
-route.delete('/profesores/:id', profesorController.borrarProfesor)
+route.delete('/profesores/:id', middlewareProfesor.existsById(Profesor), profesorController.borrarProfesor)
 
 route.get('/profesores/:id/cursos', profesorController.obtenerCursosDeProfesor)
 

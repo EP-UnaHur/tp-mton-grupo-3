@@ -76,7 +76,7 @@ const deleteMateria = async (req, res) => {
         if(result)
             res.status(200).json(`La materia con id: ${id} ha sido eliminada correctamente`)
         else
-            res.status(404).json(`La materia con id: ${id} no existe`)
+            res.status(404).json({ error: `La materia con id: ${id} no existe`})
     } catch (error) {
         res.status(500).json({ error: 'Internal Server Error' })
       }

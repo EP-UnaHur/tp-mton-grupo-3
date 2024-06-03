@@ -25,8 +25,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     nombre: DataTypes.STRING,
     fechaNacimiento: DataTypes.DATEONLY,
-    legajo: DataTypes.NUMBER,
-    activo: DataTypes.BOOLEAN,
+    legajo: DataTypes.INTEGER,
+    activo: DataTypes.TINYINT,
   }, {
     sequelize,
     modelName: 'Profesor',

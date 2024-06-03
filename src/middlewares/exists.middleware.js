@@ -4,6 +4,7 @@ const existsById = (Model) => {
         const id = req.params.id
         const instancia = await Model.findByPk(id)
         const modelName = Model.modelName || (Model.options.name && Model.options.name.singular);
+        console.log(Model.options.name)
         if (!instancia) {
             return res.status(404).json({
                 mensaje: `El ${modelName} con id ${id} no existe`

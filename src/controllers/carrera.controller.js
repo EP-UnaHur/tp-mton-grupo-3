@@ -15,7 +15,7 @@ controller.getAllCarreras = getAllCarreras;
 const carreraById = async (req, res) => {
     const id = req.params.id
     try {
-        const result = await Carrera.findByPk((id,
+        const result = await Carrera.findByPk(id,
         {
             where: {
                 id: id,
@@ -25,7 +25,7 @@ const carreraById = async (req, res) => {
                 as: 'materias'
             }]
         }
-        ));
+        );
         res.status(200).json(result);
     } catch (error) {
         res.status(404).json(`La carrera con id: ` + $(id) + ` no existe.`)
